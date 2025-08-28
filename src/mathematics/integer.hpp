@@ -264,6 +264,21 @@ public:
 		return result;
 	};
 
+	// Usage: variable.abs()
+	Integer abs() const
+	{
+		Integer result{ *this };
+		result.f_positive = true;
+		return result;
+	};
+
+	// Define abs for external access
+	friend Integer abs(Integer value)
+	{
+		value.f_positive = true;
+		return value;
+	};
+
 	// Checks if Integer is zero (0)
 	bool is_zero() const
 	{
