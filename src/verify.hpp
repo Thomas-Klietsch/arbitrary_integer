@@ -154,15 +154,13 @@ void Verify()
 	std::cout << "Verify /  : " << (Verify_Divide() ? "okay" : "failure") << ".\n";
 	std::cout << "Verify %  : " << (Verify_Modulus() ? "okay" : "failure") << ".\n";
 
-	Integer f45(1);
-	for (std::uint8_t i{ 2 };i <= 45;++i)
-		f45 = f45 * i;
-	std::cout << "Verify 45! = " << f45 << '\n';
-	std::cout << "Verify 45! = 119622220865480194561963161495657715064383733760000000000 (reference)\n";
+	std::cout << "Verify 2^64 = " << Pow2(64) << '\n';
+	std::cout << "Verify 2^64 = 18446744073709551616 (reference)\n";
 
-	Integer f50(1);
-	for (std::uint8_t i{ 2 };i <= 50;++i)
-		f50 = f50 * i;
-	std::cout << "Verify 50! = " << f50 << '\n';
+
+	std::cout << "Verify 50! = " << Factorial(50) << '\n';
 	std::cout << "Verify 50! = 30414093201713378043612608166064768844377641568960512000000000000 (reference)\n";
+
+	std::cout << "Verify GCD(2^64,50!) = " << GCD(Pow2(64), Factorial(50)) << '\n';
+	std::cout << "Verify GCD(2^64,50!) = 140737488355328 (reference)\n";
 };

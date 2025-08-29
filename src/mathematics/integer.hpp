@@ -20,6 +20,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <iostream>
+#include <vector>
 #include <sstream>
 
 // Arbitrary integer
@@ -206,6 +207,28 @@ public:
 		return result;
 	};
 
+	// Assignment.
+
+	void operator += (Integer const& value)
+	{
+		*this = *this + value;
+	};
+
+	void operator -= (Integer const& value)
+	{
+		*this = *this - value;
+	};
+
+	void operator *= (Integer const& value)
+	{
+		*this = *this * value;
+	};
+	
+	void operator /= (Integer const& value)
+	{
+		*this = *this / value;
+	};
+
 	// Logic compare.
 
 	bool operator == (Integer const& value) const
@@ -312,7 +335,7 @@ public:
 private:
 
 	// Internal methods and functions
-	
+
 	void set_value(
 		std::string const& value
 	)
@@ -567,7 +590,7 @@ Integer GCD(
 		return b;
 	else if (b.is_zero())
 		return a;
-	
+
 	if (a < b)
 		return GCD(a, b % a);
 	return GCD(b, a % b);
@@ -592,7 +615,7 @@ Integer Factorial(
 {
 	Integer result{ 1 };
 	for (std::uint16_t i{ 1 }; i <= x; ++i)
-		result = result * i;
+		result *= i;
 	return result;
 };
 
@@ -605,7 +628,7 @@ Integer FactorialFalling(
 		return Integer::Zero;
 	Integer result{ x };
 	for (std::uint16_t i{ 1 }; i < n; ++i)
-		result = result * (x - i);
+		result *= (x - i);
 	return result;
 };
 
@@ -616,7 +639,7 @@ Integer FactorialRising(
 {
 	Integer result{ x };
 	for (std::uint16_t i{ 1 }; i < n; ++i)
-		result = result * (x + i);
+		result *= (x + i);
 	return result;
 };
 
@@ -626,6 +649,6 @@ Integer Pow2(
 {
 	Integer result{ 1 };
 	for (std::uint16_t i{ 0 }; i < n; ++i)
-		result = result * 2;
+		result *= 2;
 	return result;
 };
