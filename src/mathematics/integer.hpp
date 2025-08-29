@@ -305,7 +305,7 @@ public:
 		return os;
 	};
 
-	// Useful constants, final definition at end of this file.
+	// Useful constants, final definition after class.
 	Integer static const Zero;
 	Integer static const One;
 
@@ -551,3 +551,81 @@ private:
 // Finalise definition of static constants in Integer class
 Integer const Integer::Zero(0);
 Integer const Integer::One(1);
+
+// Greatest common (positive) divisor,
+// e.g.largest divisor that is possible for both a and b
+// Returns GCD of |a| and |b|
+Integer GCD(
+	Integer a,
+	Integer b
+)
+{
+	a = abs(a);
+	b = abs(b);
+
+	if (a.is_zero())
+		return b;
+	else if (b.is_zero())
+		return a;
+	
+	if (a < b)
+		return GCD(a, b % a);
+	return GCD(b, a % b);
+};
+
+// Returns GCD of all elements in a vector
+Integer GCD(
+	std::vector<Integer> const& a
+)
+{
+	if (!a.size())
+		return Integer::Zero;
+	Integer gcd{ abs(a[0]) };
+	for (std::uint64_t i{ 0 }; i < a.size(); ++i)
+		gcd = GCD(a[i], gcd);
+	return gcd;
+};
+
+Integer Factorial(
+	std::uint8_t const x
+)
+{
+	Integer result{ 1 };
+	for (std::uint16_t i{ 1 }; i <= x; ++i)
+		result = result * i;
+	return result;
+};
+
+Integer FactorialFalling(
+	std::uint8_t const x,
+	std::uint8_t const n
+)
+{
+	if (n > x)
+		return Integer::Zero;
+	Integer result{ x };
+	for (std::uint16_t i{ 1 }; i < n; ++i)
+		result = result * (x - i);
+	return result;
+};
+
+Integer FactorialRising(
+	std::uint8_t const x,
+	std::uint8_t const n
+)
+{
+	Integer result{ x };
+	for (std::uint16_t i{ 1 }; i < n; ++i)
+		result = result * (x + i);
+	return result;
+};
+
+Integer Pow2(
+	std::uint8_t const n
+)
+{
+	Integer result{ 1 };
+	for (std::uint16_t i{ 0 }; i < n; ++i)
+		result = result * 2;
+	return result;
+};
